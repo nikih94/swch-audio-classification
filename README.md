@@ -11,12 +11,7 @@
   </div>
   <div align="left">
     <br>
-    <a href="#">
-
-    </a><br>
-    <a href="#">
-
-    </a>
+    <img alt="Static Badge" src="https://img.shields.io/badge/license-MIT-green">
 </div>
 
 
@@ -32,16 +27,8 @@
 
 ## General info
 
+TO-DO
 
-
-## Acknowledgments
-
-We would like to acknowledge the collegues Aleksandar Tošić[1,2], dr. Jernej Vičič[1] for the theoretical fundations, which are the basis for this implementation.
-<br/>
-<br/>
-[1] University of Primorska Faculty of Mathematics, Natural Sciences and Information Technologies
-<br/>
-[2] Innorenew CoE
 
 ## Technologies
 
@@ -60,3 +47,10 @@ Version 1.0
 ## Documentation
 
 ### Software API
+
+
+
+## Acknowledgments
+
+This work was funded by the European Commission’s Horizon programme within the Swarmchestrate project, (project no. 101135012).
+
