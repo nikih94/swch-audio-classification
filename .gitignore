@@ -1,0 +1,7 @@
+configuration.ini
+image-audio_classification.tar
+**/__pycache__/
+venv/
+resources/dymn20_as_mAP_493.pt
+resources/mn30_as_mAP_482.pt
+resources/mn40_as_mAP_484.pt
