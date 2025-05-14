@@ -68,12 +68,13 @@ This repository relies on the pre-trained CNNs from [EfficientAT](https://github
 ### Configuration File
 
 The application behavior is defined via a configuration file named `configuration.ini`. This file specifies the audio classification model and InfluxDB connection parameters.
+A template is given in the 'configuration_template.ini' file.
 
 #### `[classification]`
 
 Configuration for the audio classification model.
 
-- `model_name`: Name of the pre-trained CNN model to use for inference. (e.g.,  `dymn04_as`) 
+- `model_name`: Name of the pre-trained CNN model to use for inference. (e.g.,  `dymn04_as`)
 - `window_size`: Window size in milliseconds of inference processing. (e.g., `800`).
 - `hop_size`: Hop size for next window processing in milliseconds. (e.g., `320`).
 
@@ -139,4 +140,3 @@ After classification, metadata about each processed audio recording is stored in
 ## Acknowledgments
 
 This work was funded by the European Commission’s Horizon programme within the Swarmchestrate project, (project no. 101135012).
-
