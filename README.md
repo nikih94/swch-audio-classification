@@ -74,7 +74,7 @@ This repository relies on the pre-trained CNNs from [EfficientAT](https://github
 ### Configuration File
 
 The application behavior is defined via a configuration file named `configuration.ini`. This file specifies the audio classification model and InfluxDB connection parameters.
-A template is given in the 'configuration_template.ini' file.
+A template is given in the `configuration_template.ini` file.
 
 #### `[classification]`
 
