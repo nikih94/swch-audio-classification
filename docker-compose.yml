@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  audio_classification:
+    image: nikih94/audio_classification:latest
+    platform: linux/amd64
+    ports:
+      - "127.0.0.1:42002:42002"
+    volumes:
+      - ./configuration.ini:/app/configuration.ini
