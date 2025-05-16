@@ -1,4 +1,3 @@
-# Use an official Python runtime as a base image.
 # FROM arm64v8/python:3.10-bookworm
 FROM python:3.10-bookworm
 
@@ -17,5 +16,5 @@ COPY resources/ ./resources/
 # Expose the port the Waitress server is listening on.
 EXPOSE 42002
 
-# Start the application (main.py should start your Waitress server).
+# Start the application
 CMD ["python", "src/main.py"]
