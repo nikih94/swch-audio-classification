@@ -40,6 +40,10 @@ This repository contains the code for the sound classification container managed
 
 Available at [dockerhub](https://hub.docker.com/repository/docker/nikih94/audio_classification/)
 
+Images built for:
+- amd64
+- arm64v8 (raspberryPI)
+
 ## Documentation
 
 The program is structured around three main components: HTTP server, inference and result manager.
