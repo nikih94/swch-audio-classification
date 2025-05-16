@@ -20,7 +20,9 @@
 * [General info](#general-info)
 * [Technologies](#technologies)
 * [Documentation](#documentation)
+* [Testing](#testing)
 * [Acknowledgments](#acknowledgments)
+
 
 ## General info
 
@@ -139,6 +141,17 @@ After classification, metadata about each processed audio recording is stored in
 ### Timestamp
 
 - The exact time the audio was recorded, as reported in the `timestamp` field of the request.
+
+## Testing
+
+Audio files are provided for testing, located in the folder `sample_audio`.
+
+You can test the HTTP API using tools like [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/).
+The following figure shows how to setup the api call.
+The following fields can be set to arbitrary values: sensor_id, building, max_spl, avg_spl, threshold, rec_seconds.
+Sample rate should match the audio recording, provided samples are at 32kHz.
+
+![Insomnia setup example](./images/api_call.png)
 
 
 ## Acknowledgments
