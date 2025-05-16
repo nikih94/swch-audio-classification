@@ -1,5 +1,6 @@
 # Use an official Python runtime as a base image.
-FROM arm64v8/python:3.10-bookworm
+# FROM arm64v8/python:3.10-bookworm
+FROM python:3.10-bookworm
 
 # Set the working directory inside the container.
 WORKDIR /app

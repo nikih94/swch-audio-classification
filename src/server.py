@@ -33,10 +33,8 @@ def create_app(request_queue: Queue) -> Flask:
             'timestamp': timestamp,
             'audio': audio_data
         }
-
         # Place the data into the blocking queue.
         request_queue.put(data)
-
         # Respond with a JSON success message.
         return jsonify({"status": "success"}), 200
 

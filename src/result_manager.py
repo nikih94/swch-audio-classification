@@ -41,6 +41,7 @@ class ResultManager:
 
             self.write_api.write(bucket=self.bucket, record=p)
             self.retries = 0
+
             #print("result: ", result)
             #print("sent to influx: ",result['result'])
         except Exception as e:
