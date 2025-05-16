@@ -144,7 +144,13 @@ After classification, metadata about each processed audio recording is stored in
 
 ## Testing
 
-Audio files are provided for testing, located in the folder `sample_audio`.
+### Docker-compose
+
+A [docker-compose](docker-compose.yml) file is provided to show configuration-file and port mapping.
+
+### API
+
+Audio files are provided for testing, located in the folder [sample_audio](sample_audio).
 
 You can test the HTTP API using tools like [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/).
 The following figure shows how to setup the api call.
