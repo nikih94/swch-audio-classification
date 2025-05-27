@@ -160,6 +160,25 @@ Sample rate should match the audio recording, provided samples are at 32kHz.
 ![Insomnia setup example](./images/api_call.png)
 
 
+### cURL
+
+```bash
+curl --request POST \
+  --url http://127.0.0.1:42002/classification \
+  --header 'Content-Type: multipart/form-data' \
+  --header 'User-Agent: insomnia/11.0.2' \
+  --form sensor_id=insomnia \
+  --form file=@path/sample_audio/typing.wav \
+  --form building=insomnia \
+  --form max_spl=90.1 \
+  --form avg_spl=78.2 \
+  --form threshold=60 \
+  --form rec_seconds=10 \
+  --form sample_rate=32000 \
+  --form timestamp=1748333948
+```
+
+
 ## Acknowledgments
 
 This work was funded by the European Commission’s Horizon programme within the Swarmchestrate project, (project no. 101135012).
