@@ -9,6 +9,7 @@ class ClassificationConfig:
     model_name: str
     window_size: int
     hop_size: int
+    ensemble: list
 
 
 @dataclass
@@ -34,8 +35,15 @@ def load_config(filename: str) -> AppConfig:
 
     classification = ClassificationConfig(
         model_name=parser.get("classification", "model_name"),
-        window_size=parser.getint("classification", "window_size"),
-        hop_size=parser.getint("classification", "hop_size"),
+        window_size=parser.getint("classification", "window_size", fallback=400),
+        hop_size=parser.getint("classification", "hop_size", fallback=160),
+        ensemble=[
+            model.strip()
+            for model in parser.get("classification", "ensemble", fallback="").split(
+                ","
+            )
+            if model.strip()
+        ],
     )
 
     influx2 = Influx2Config(

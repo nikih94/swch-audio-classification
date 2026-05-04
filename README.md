@@ -68,7 +68,7 @@ This repository relies on the pre-trained CNNs from [EfficientAT](https://github
 | mn20_as           | 17.91             | 2.06            | 47.8              |
 | mn30_as           | 39.09             | 4.55            | 48.2              |
 | mn40_as           | 68.43             | 8.03            | 48.4              |
-
+| mn40_as_ext       | 68.43             | 8.03            | 48.7              |
 
 
 ### Configuration File
@@ -81,8 +81,7 @@ A template is given in the [configuration_template.ini](configuration_template.i
 Configuration for the audio classification model.
 
 - `model_name`: Name of the pre-trained CNN model to use for inference. (e.g.,  `dymn04_as`)
-- `window_size`: Window size in milliseconds of inference processing. (e.g., `800`).
-- `hop_size`: Hop size for next window processing in milliseconds. (e.g., `320`).
+- `ensemble`: Comma-separated list of model names to use in ensemble configuration. (e.g., `mn40_as,dymn20_as`)  If empty, fallback on `model_name`
 
 #### `[influx2]`
 
@@ -92,6 +91,7 @@ Configuration for writing data to InfluxDB v2.
 - `org`: Name of the InfluxDB organization.
 - `token`: Access token for authentication.
 - `data_bucket`: Name of the bucket where classification results are stored.
+- `delay`: Set to `True` to measure E2E delay through influxdb. (True--adds additianal timestamp of sound event detection, False--event is inserted in influx at event detection)
 
 
 ### API
@@ -143,6 +143,14 @@ After classification, metadata about each processed audio recording is stored in
 - The exact time the audio was recorded, as reported in the `timestamp` field of the request.
 
 ## Testing
+
+### Docker run
+
+```bash
+docker run -p 127.0.0.1:42002:42002 \
+  -v "$(pwd)/configuration.ini:/app/configuration.ini" \
+  nikih94/audio_classification:latest
+```
 
 ### Docker-compose
 
