@@ -31,6 +31,9 @@ def main():
     request_queue = Queue()
     # Create a blockin queue for inference results
     result_queue = Queue()
+    
+    if config.classification.debug_mode:
+        print("started in debug mode", flush=True)
 
     # Start the web server in a separate thread.
     server_thread = threading.Thread(
@@ -65,7 +68,7 @@ def main():
     )
     result_manager_thread.start()
 
-    print("Server and inference workers are running. Waiting for requests...")
+    print("Server and inference workers are running. Waiting for requests...",flush=True)
     # Main loop that monitors thread status.
     while True:
         if not (
@@ -73,7 +76,7 @@ def main():
             and inference_thread.is_alive()
             and result_manager_thread.is_alive()
         ):
-            print("A thread has terminated. Exiting the application.")
+            print("A thread has terminated. Exiting the application.",flush=True)
             sys.exit(1)
         time.sleep(1)
 

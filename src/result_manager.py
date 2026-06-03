@@ -57,8 +57,8 @@ class ResultManager:
             self.retries = 0
 
             if self.debug_mode:
-                print("successfully stored to db")
-                print("--------------------------------------------------------------------")
+                print("successfully stored to db",flush=True)
+                print("--------------------------------------------------------------------",flush=True)
 
             # print("result: ", result)
             # print("sent to influx: ",result['result'])

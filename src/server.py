@@ -14,8 +14,8 @@ def create_app(request_queue: Queue, debug_mode: bool = False) -> Flask:
     @app.route("/classification", methods=["POST"])
     def classification():
         if debug_mode:
-            print("--------------------------------------------------------------------")
-            print("request received")
+            print("--------------------------------------------------------------------",flush=True)
+            print("request received",flush=True)
 
         # Extract form data.
         sensor_id = request.form.get("sensor_id")

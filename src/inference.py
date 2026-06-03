@@ -120,8 +120,8 @@ class InferenceEngine:
         del item["sample_rate"]
 
         if self.debug_mode:
-            print("audio processed")
-            print(item)
+            print("audio processed",flush=True)
+            print(item,flush=True)
 
         return item
 
