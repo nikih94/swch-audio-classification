@@ -82,6 +82,7 @@ Configuration for the audio classification model.
 
 - `model_name`: Name of the pre-trained CNN model to use for inference. (e.g.,  `dymn04_as`)
 - `ensemble`: Comma-separated list of model names to use in ensemble configuration. (e.g., `mn40_as,dymn20_as`)  If empty, fallback on `model_name`
+- `debug_mode`: Boolean field to print debug information. 
 
 #### `[influx2]`
 

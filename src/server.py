@@ -4,7 +4,7 @@ from flask import Flask, jsonify, request
 from waitress import serve
 
 
-def create_app(request_queue: Queue) -> Flask:
+def create_app(request_queue: Queue, debug_mode: bool = False) -> Flask:
     app = Flask(__name__)
 
     @app.route("/ready", methods=["GET"])
@@ -13,6 +13,10 @@ def create_app(request_queue: Queue) -> Flask:
 
     @app.route("/classification", methods=["POST"])
     def classification():
+        if debug_mode:
+            print("--------------------------------------------------------------------")
+            print("request received")
+
         # Extract form data.
         sensor_id = request.form.get("sensor_id")
         building = request.form.get("building")
@@ -47,9 +51,9 @@ def create_app(request_queue: Queue) -> Flask:
     return app
 
 
-def start_server(request_queue: Queue) -> None:
+def start_server(request_queue: Queue, debug_mode: bool = False) -> None:
     """
     Starts the Flask web server using Waitress on 127.0.0.1:42002.
     """
-    app = create_app(request_queue)
+    app = create_app(request_queue, debug_mode)
     serve(app, host="0.0.0.0", port=42002)

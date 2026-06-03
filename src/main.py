@@ -34,7 +34,9 @@ def main():
 
     # Start the web server in a separate thread.
     server_thread = threading.Thread(
-        target=start_server, args=(request_queue,), daemon=True
+        target=start_server,
+        args=(request_queue, config.classification.debug_mode),
+        daemon=True,
     )
     server_thread.start()
 
@@ -45,6 +47,7 @@ def main():
         window_size=config.classification.window_size,
         hop_size=config.classification.hop_size,
         result_queue=result_queue,
+        debug_mode=config.classification.debug_mode,
     )
 
     # Start the inference loop in a separate daemon thread.
@@ -54,7 +57,9 @@ def main():
     inference_thread.start()
 
     # Instantiate and start the result manager.
-    result_manager = ResultManager(result_queue, config.influx2)
+    result_manager = ResultManager(
+        result_queue, config.influx2, config.classification.debug_mode
+    )
     result_manager_thread = threading.Thread(
         target=result_manager.start_result_manager, daemon=True
     )

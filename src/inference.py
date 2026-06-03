@@ -19,8 +19,11 @@ from models.preprocess import AugmentMelSTFT
 
 
 class InferenceEngine:
-    def __init__(self, model_name, ensemble, window_size, hop_size, result_queue):
+    def __init__(
+        self, model_name, ensemble, window_size, hop_size, result_queue, debug_mode=False
+    ):
         self.model_name = model_name
+        self.debug_mode = debug_mode
         self.model_reload_lock = threading.Lock()
         self.model = None
         self.class_names = None
@@ -115,6 +118,10 @@ class InferenceEngine:
         item["inference_time_ms"] = int((end_time - start_time) * 1000)
         del item["audio"]
         del item["sample_rate"]
+
+        if self.debug_mode:
+            print("audio processed")
+            print(item)
 
         return item
 

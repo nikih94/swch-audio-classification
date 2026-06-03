@@ -9,9 +9,10 @@ from influxdb_client.client.write_api import SYNCHRONOUS
 
 
 class ResultManager:
-    def __init__(self, result_queue, influx2_config):
+    def __init__(self, result_queue, influx2_config, debug_mode=False):
         self.result_queue = result_queue
         self.influx2_config = influx2_config
+        self.debug_mode = debug_mode
         self.delay = self.influx2_config.delay
         self.url = self.influx2_config.url
         self.token = self.influx2_config.token
@@ -54,6 +55,10 @@ class ResultManager:
 
             self.write_api.write(bucket=self.bucket, record=p)
             self.retries = 0
+
+            if self.debug_mode:
+                print("successfully stored to db")
+                print("--------------------------------------------------------------------")
 
             # print("result: ", result)
             # print("sent to influx: ",result['result'])

@@ -10,6 +10,7 @@ class ClassificationConfig:
     window_size: int
     hop_size: int
     ensemble: list
+    debug_mode: bool
 
 
 @dataclass
@@ -35,6 +36,7 @@ def load_config(filename: str) -> AppConfig:
 
     classification = ClassificationConfig(
         model_name=parser.get("classification", "model_name"),
+        debug_mode=parser.get("classification", "debug_mode", fallback=False),
         window_size=parser.getint("classification", "window_size", fallback=400),
         hop_size=parser.getint("classification", "hop_size", fallback=160),
         ensemble=[
