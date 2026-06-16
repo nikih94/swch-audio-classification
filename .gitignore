@@ -1,4 +1,5 @@
 configuration.ini
+configuration-izola.ini
 **/__pycache__/
 venv/
 resources/dymn20_as_mAP_493.pt
@@ -8,3 +9,4 @@ resources/mn40_as_ext_mAP_487.pt
 benchmark.md
 .python-version
 HARBOR_DOCKERHUB.md
+
