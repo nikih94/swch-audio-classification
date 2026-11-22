@@ -1,0 +1,9 @@
+from prometheus_client import CollectorRegistry, Counter, disable_created_metrics
+
+disable_created_metrics()
+registry = CollectorRegistry()
+requests_processed = Counter(
+    "app_requests_processed_total",
+    "Sound classification requests processed on this device",
+    registry=registry,
+)

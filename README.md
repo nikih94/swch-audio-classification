@@ -116,6 +116,20 @@ This endpoint receives an audio recording along with metadata and queues it for 
   - `file` (binary): The audio file (e.g., WAV format) to be classified.
 
 
+### Prometheus metrics
+
+`GET /metrics` exposes `app_requests_processed_total`, the number of successful
+audio classifications handed to the result queue by this process. The counter
+starts at zero on restart. Scraping it does not change its value.
+
+```sh
+curl http://localhost:42002/metrics
+```
+
+Configure the SAT's processed collector to scrape the classification component
+on port `42002` at `/metrics`. The sent collector uses the separate exporter
+on port `9009`.
+
 ### InfluxDB Data Schema
 
 After classification, metadata about each processed audio recording is stored in InfluxDB for monitoring and analysis.

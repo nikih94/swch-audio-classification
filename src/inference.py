@@ -16,6 +16,7 @@ from models.dymn.model import get_model as get_dymn
 from models.ensemble import get_ensemble_model
 from models.mn.model import get_model as get_mobilenet
 from models.preprocess import AugmentMelSTFT
+from metrics import requests_processed
 
 
 class InferenceEngine:
@@ -136,6 +137,9 @@ class InferenceEngine:
         except Exception as e:
             print("Exception in inference task:", e)
             self.reload_model()
+
+        else:
+            requests_processed.inc()
 
     def start_inference(self, request_queue):
         with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:

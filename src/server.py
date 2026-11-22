@@ -1,11 +1,18 @@
 from queue import Queue
 
-from flask import Flask, jsonify, request
+from flask import Flask, Response, jsonify, request
+from prometheus_client import CONTENT_TYPE_LATEST, generate_latest
 from waitress import serve
+
+from metrics import registry
 
 
 def create_app(request_queue: Queue, debug_mode: bool = False) -> Flask:
     app = Flask(__name__)
+
+    @app.get("/metrics")
+    def metrics():
+        return Response(generate_latest(registry), content_type=CONTENT_TYPE_LATEST)
 
     @app.route("/ready", methods=["GET"])
     def ready():
@@ -31,6 +38,20 @@ def create_app(request_queue: Queue, debug_mode: bool = False) -> Flask:
         file_storage = request.files.get("file")
         audio_data = file_storage.read() if file_storage else None
 
+        errors = {}
+        if not sensor_id or not sensor_id.strip():
+            errors["sensor_id"] = "sensor_id is required."
+        try:
+            sample_rate = int(sample_rate)
+            if sample_rate <= 0:
+                raise ValueError
+        except (TypeError, ValueError):
+            errors["sample_rate"] = "sample_rate is required and must be a positive integer."
+        if not audio_data:
+            errors["file"] = "A non-empty audio file is required."
+        if errors:
+            return jsonify({"status": "error", "errors": errors}), 400
+
         # Build a dictionary from the received data.
         data = {
             "sensor_id": sensor_id,
@@ -39,7 +60,7 @@ def create_app(request_queue: Queue, debug_mode: bool = False) -> Flask:
             "avg_spl": avg_spl,
             "threshold": threshold,
             "rec_seconds": rec_seconds,
-            "sample_rate": int(sample_rate),
+            "sample_rate": sample_rate,
             "timestamp": timestamp,
             "audio": audio_data,
         }
