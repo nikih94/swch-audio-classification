@@ -4,7 +4,7 @@
       <span style="color: #FF1493" >Noise Source Classification at the Edge</span>
     </h1>
     <h3>
-        <img alt="Up-famnit Logo" src="https://www.swarmchestrate.eu/meet-the-consortium-series-innorenew-coe/"  height ="100px">
+        <img alt="Up-famnit Logo" src="https://www.swarmchestrate.eu/wp-content/uploads/2025/10/1-logo-InnoRenew-RGB-COLOR-01.png"  height ="100px">
         <img alt="InnoRenew Logo" src="https://innorenew.eu/app/themes/innorenew/assets/img/logo_color.svg" style="vertical-align: middle" height ="100px">
         <img alt="swch - logo" src="https://www.swarmchestrate.eu/wp-content/uploads/2024/04/logo-horizontal.png"  height ="100px">
   </h3>
