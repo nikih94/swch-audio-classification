@@ -48,9 +48,9 @@ Images built for:
 ## Documentation
 
 The program is structured around three main components: HTTP server, inference and result manager.
-- [The HTTP server](src/server.py) listens for incoming HTTP POST requests structured as described in section [API](###api).
-- [The inference](src/inference.py) component manages the audio preprocessing, model loading and inference.
-- [The result manager](src/result_manager.py) is responsible of inserting classification results into an InfluxDB instance.
+- The HTTP server listens for incoming HTTP requests structured as described in section [API](###api).
+- The inference component manages the audio preprocessing, model loading and inference.
+- The result manager is responsible of inserting classification results into an InfluxDB instance.
 
 This repository relies on the pre-trained CNNs from [EfficientAT](https://github.com/fschmid56/EfficientAT), a collection of efficient audio transformers and CNN models. These models were trained on [AudioSet](https://research.google.com/audioset/), a large-scale dataset of labeled 10-second audio clips released by Google. AudioSet covers a wide range of environmental and human-made sound classes, making the models suitable for robust real-world audio classification tasks.
 
