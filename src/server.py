@@ -12,7 +12,16 @@ def create_app(request_queue: Queue, debug_mode: bool = False) -> Flask:
 
     @app.get("/metrics")
     def metrics():
-        return Response(generate_latest(registry), content_type=CONTENT_TYPE_LATEST)
+        payload = generate_latest(registry)
+        if debug_mode:
+            print("--------------------------------------------------------------------",flush=True)
+            print("Prometheuse metrics request received",flush=True)
+            print(
+                f"{request.method} /metrics request received\n{payload.decode('utf-8')}",
+                end="",
+                flush=True,
+            )
+        return Response(payload, content_type=CONTENT_TYPE_LATEST)
 
     @app.route("/ready", methods=["GET"])
     def ready():
@@ -22,7 +31,7 @@ def create_app(request_queue: Queue, debug_mode: bool = False) -> Flask:
     def classification():
         if debug_mode:
             print("--------------------------------------------------------------------",flush=True)
-            print("request received",flush=True)
+            print("Classification request received",flush=True)
 
         # Extract form data.
         sensor_id = request.form.get("sensor_id")

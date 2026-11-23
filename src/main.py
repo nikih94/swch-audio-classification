@@ -6,6 +6,7 @@ from queue import Queue
 
 from configuration import load_config
 from inference import InferenceEngine
+from metrics import run_metric_test
 from result_manager import ResultManager
 from server import start_server
 
@@ -33,7 +34,7 @@ def main():
     result_queue = Queue()
     
     if config.classification.debug_mode:
-        print("started in debug mode", flush=True)
+        print("Started in debug mode", flush=True)
 
     # Start the web server in a separate thread.
     server_thread = threading.Thread(
@@ -67,6 +68,9 @@ def main():
         target=result_manager.start_result_manager, daemon=True
     )
     result_manager_thread.start()
+
+    if config.classification.metric_test:
+        threading.Thread(target=run_metric_test, daemon=True).start()
 
     print("Server and inference workers are running. Waiting for requests...",flush=True)
     # Main loop that monitors thread status.

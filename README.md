@@ -82,7 +82,8 @@ Configuration for the audio classification model.
 
 - `model_name`: Name of the pre-trained CNN model to use for inference. (e.g.,  `dymn04_as`)
 - `ensemble`: Comma-separated list of model names to use in ensemble configuration. (e.g., `mn40_as,dymn20_as`)  If empty, fallback on `model_name`
-- `debug_mode`: Boolean field to print debug information. 
+- `debug_mode`: Boolean field to print additional information.
+- `metric_test` : Boolean field to artificlially increase the count of audio classification requests, for testing purposes of the application level metric.
 
 #### `[influx2]`
 
@@ -116,19 +117,19 @@ This endpoint receives an audio recording along with metadata and queues it for 
   - `file` (binary): The audio file (e.g., WAV format) to be classified.
 
 
-### Prometheus metrics
+### Application level metric
 
-`GET /metrics` exposes `app_requests_processed_total`, the number of successful
-audio classifications handed to the result queue by this process. The counter
-starts at zero on restart. Scraping it does not change its value.
+`GET /metrics` exposes `app_requests_processed_total`, the number of successfully processed audio classification requests. The counter
+starts at zero on restart. 
+
+#### Testing the metric
+
+To test metric collection, set `metric_test=True` under `[classification]` in `configuration.ini` and start the container with that configuration. The app adds one synthetic count every five seconds alongside counts from real audio classification requests. 
 
 ```sh
-curl http://localhost:42002/metrics
+curl http://127.0.0.1:42002/metrics
 ```
 
-Configure the SAT's processed collector to scrape the classification component
-on port `42002` at `/metrics`. The sent collector uses the separate exporter
-on port `9009`.
 
 ### InfluxDB Data Schema
 

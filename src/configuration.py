@@ -1,6 +1,7 @@
 # configuration.py
 
 import configparser
+import re
 from dataclasses import dataclass
 
 
@@ -11,6 +12,7 @@ class ClassificationConfig:
     hop_size: int
     ensemble: list
     debug_mode: bool
+    metric_test: bool = False
 
 
 @dataclass
@@ -29,6 +31,16 @@ class AppConfig:
     influx2: Influx2Config
 
 
+def _classification_flag(parser: configparser.ConfigParser, name: str) -> bool:
+    value = parser.get("classification", name, raw=True, fallback="")
+    value = re.split(r"(?:^|\s)[#;]", value, maxsplit=1)[0].strip().lower()
+    if not value:
+        return False
+    if value not in parser.BOOLEAN_STATES:
+        raise ValueError(f"Invalid boolean for [classification] {name}: {value!r}")
+    return parser.BOOLEAN_STATES[value]
+
+
 def load_config(filename: str) -> AppConfig:
     """Reads the INI file and returns an AppConfig object."""
     parser = configparser.ConfigParser()
@@ -36,7 +48,8 @@ def load_config(filename: str) -> AppConfig:
 
     classification = ClassificationConfig(
         model_name=parser.get("classification", "model_name"),
-        debug_mode=parser.get("classification", "debug_mode", fallback=False),
+        debug_mode=_classification_flag(parser, "debug_mode"),
+        metric_test=_classification_flag(parser, "metric_test"),
         window_size=parser.getint("classification", "window_size", fallback=400),
         hop_size=parser.getint("classification", "hop_size", fallback=160),
         ensemble=[

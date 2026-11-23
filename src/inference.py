@@ -74,8 +74,6 @@ class InferenceEngine:
                 new_model.eval()
                 self.model = new_model
                 print("Model reloaded successfully.")
-
-                print("Model reloaded successfully.")
             except Exception as e:
                 print("Error reloading model:", e)
 
